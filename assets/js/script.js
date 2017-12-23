@@ -21,15 +21,19 @@ document.addEventListener ("DOMContentLoaded", function (e) {
         let username = event.target.value.trim();
         let userUrl = 'https://api.github.com/users/'+username;
 
-        fetch(userUrl, myInit)
-            .then(response => response.json())
-            .then(function (response) {
+        if (username === '') {
+            showError("Please Enter a Username");
+        } else {
+            fetch(userUrl, myInit)
+              .then(response => response.json())
+              .then(function (response) {
                 // console.log(response);
                 displayUserInfo(response);
                 getUserRepo(username);
-            }).catch(error => {
-                // console.log ("Failed to fetch: " + error);
-            })
+              }).catch(errorMessage => {
+                console.log ("Failed to fetch: " + errorMessage);
+              })
+        }
     }
 
     function getUserRepo (userName) {
@@ -40,8 +44,8 @@ document.addEventListener ("DOMContentLoaded", function (e) {
             .then(function (response) {
                 console.log(response);
                 displayUserRepo(response);
-            }).catch(error => {
-                // console.log ("Failed to fetch: " + error);
+            }).catch(errorMessage => {
+                console.log ("Failed to fetch: " + errorMessage);
             })
     }
 
@@ -112,15 +116,16 @@ document.addEventListener ("DOMContentLoaded", function (e) {
             `;
         })
 
-        userRepo.innerHTML = repoFound;
+        // userRepo.innerHTML = repoFound;
     }
 
-    function showError (error) {
+    function showError (errorMessage) {
         let displayError = `
             <div class="alert alert-danger" role="alert">
-                <p class="text-center">Failed to fetch! 🙁 + ${error}</p>
+                <p class="text-center">Failed to fetch! 🙁: ${errorMessage}</p>
             </div>
         `
         userProfile.innerHTML = displayError;
+        // console.log(errorMessage)
     }
 })
