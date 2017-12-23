@@ -8,9 +8,9 @@ document.addEventListener ("DOMContentLoaded", function (e) {
         headers: myHeaders,
         data: {
             client_id: 'c2e911e7e9864234202c',
-            client_secret: 'cbcf24a5d60154cedbeef33a37e2b1c822e0c3c9'
-            /* sort: 'created_asc',
-            per_page: 10 */
+            client_secret: 'cbcf24a5d60154cedbeef33a37e2b1c822e0c3c9',
+            sort: 'created_asc',
+            per_page: 10
         }
     };
 
@@ -93,7 +93,6 @@ document.addEventListener ("DOMContentLoaded", function (e) {
     function displayUserRepo (repoData) {
         let userRepo = document.querySelector('#repos');
         repoData.map((repo) => {
-            // userRepo.innerHTML = repoFound;
             return userRepo.innerHTML += `
                 <div class="well">
                     <div class="row">
@@ -112,24 +111,6 @@ document.addEventListener ("DOMContentLoaded", function (e) {
                 </div>
             `;
         })
-
-        /* repoFound = `
-            <div class="well">
-                <div class="row">
-                    <div class="col-md-12">
-                        <strong>${repo.name}</strong>: ${repo.description}
-                    </div>
-                    <div class="col-md-8 mrg-btm-10">
-                        <span class="label label-default"><b>Forks: </b>${repo.forks_count}</span>
-                        <span class="label label-primary"><b>Watchers: </b>${repo.watchers_count}</span>
-                        <span class="label label-success"><b>Stars: </b>${repo.stargazers_count}</span>
-                    </div>
-                    <div class="col-md-4 mrg-btm-10">
-                        <a target="_blank" class="btn btn-primary btn-block" href="${repo.html_url}">Repo Page</a>
-                    </div>
-                </div>
-            </div>
-        `; */
 
         userRepo.innerHTML = repoFound;
     }
